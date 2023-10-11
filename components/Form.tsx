@@ -82,11 +82,14 @@ export default function SearchByDateForm() {
                                     {
                                         (asteroids.near_earth_objects || {})[day].map((asteroid) => {
                                             return (
-                                                <li key={asteroid.id}>
-                                                    <a href={asteroid.nasa_jpl_url} target="_blank" rel="noreferrer">
-                                                        {asteroid.name}
-                                                    </a>
-                                                </li>
+                                                <article>
+                                                    <header>ASTEROID:  {asteroid.name}</header>
+                                                    Diameter: {asteroid.estimated_diameter.kilometers.estimated_diameter_min} - {asteroid.estimated_diameter.kilometers.estimated_diameter_max} km<br />
+                                                    Close Approach Date: {asteroid.close_approach_data[0].close_approach_date_full}<br />
+                                                    Miss Distance: {Math.round(asteroid.close_approach_data[0].miss_distance.kilometers)} km<br />
+                                                    Relative Velocity: {Math.round(asteroid.close_approach_data[0].relative_velocity.kilometers_per_hour)} km/h<br />
+                                                    Potentially Hazardous: {asteroid.is_potentially_hazardous_asteroid ? 'Yes, do panic' : 'not wiping us yet'}<br />
+                                                </article>
                                             )
                                         })
                                     }
